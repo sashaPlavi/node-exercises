@@ -1,12 +1,24 @@
 const http = require("http");
+const url = require("url");
+const fs = require("fs");
 
 http
   .createServer((req, res) => {
-    res.writeHead(200, { "content-type": "text/html" });
+    const q = url.parse(req.url, true);
+    const filename = "." + q.pathname;
+    console.log(filename);
+    fs.readFile(filename, function(err, data) {
+      if (err) {
+        res.writeHead(404, { "Content-Type": "text/html" });
+        return res.end("404 Not Found");
+      }
 
-    res.write("<h1>Hello Node!!!!</h1>\n");
-    res.write(`<h1>${req.url.slice(1)}</h1>`);
-    res.end();
+      res.writeHead(200, { "content-type": "text/html" });
+
+      res.write(data);
+
+      res.end();
+    });
   })
   .listen(3000);
 
