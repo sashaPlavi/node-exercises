@@ -5,7 +5,7 @@ http
     res.writeHead(200, { "content-type": "text/html" });
 
     res.write("<h1>Hello Node!!!!</h1>\n");
-    res.write(`<h1>${req.url}</h1>`);
+    res.write(`<h1>${req.url.slice(1)}</h1>`);
     res.end();
   })
   .listen(3000);
