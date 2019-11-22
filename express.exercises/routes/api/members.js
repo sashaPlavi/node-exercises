@@ -15,11 +15,9 @@ router.get("/", (req, res) => {
 // geting single member
 router.get("/:id", (req, res) => {
   const found = members.some(member => member.id === parseInt(req.params.id));
-  console.log(req);
 
   if (found) {
     res.json(members.filter(member => member.id === parseInt(req.params.id)));
-    console.log("bla");
   } else {
     //changing status code and eror mesage
     res
