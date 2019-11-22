@@ -4,7 +4,9 @@ const path = require("path");
 //const loger = require("./midleware/loger");
 
 const app = express();
-
+//body parser midleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 //init modleware
 //app.use(loger);
 
