@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const members = require("../../members");
+const uuid = require("uuid");
 //console.log(members);
 console.log(router);
 //console.log(express);
@@ -25,6 +26,20 @@ router.get("/:id", (req, res) => {
       .json({ msg: `no member with id ${req.params.id} was found` });
     console.log("bla2");
   }
+});
+//creating member
+router.post("/", (req, res) => {
+  const NewMember = {
+    id: uuid.v4(),
+    name: req.body.name,
+    mail: req.body.mail,
+    status: "active"
+  };
+  if (!NewMember.name || !NewMember.mail) {
+    return res.status(400).json({ msg: "please enter mail and name" });
+  }
+  members.push(NewMember);
+  res.json(members);
 });
 
 module.exports = router;
